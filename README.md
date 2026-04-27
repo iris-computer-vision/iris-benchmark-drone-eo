@@ -67,123 +67,115 @@ All models were trained and evaluated using a consistent dataset split and align
 
 ---
 
-## Key Result
+## Observed Behavior
 
-Model performance varies significantly across architectures under identical conditions.
+Model behavior varied consistently across architectures under identical conditions.
+
+Several patterns emerged during evaluation:
+
+- significant differences in recall at long range  
+- variation in localization stability across architectures  
+- architecture-specific failure modes  
+- inconsistency between confidence scores and detection reliability  
 
 <p align="center">
   <img src="assets/iris-benchmark-drone-eo-comparison.png" width="90%" />
 </p>
 
-In this example:
+Across multiple validation samples:
 
-- RT-DETR successfully detects a distant target  
-- Faster R-CNN fails to detect the same target (missed detection)  
-- YOLOv8 detects the target but exhibits instability in localization  
+- some models maintained detection at long range while others failed entirely  
+- certain architectures exhibited duplicate detections under clutter  
+- localization quality varied even when detections were present  
 
-These patterns are observed consistently across multiple validation samples.
+One architecture demonstrated a consistent failure mode at distance, missing all long-range instances despite strong performance under closer conditions.
 
----
-
-## Observed Behavior
-
-### RT-DETR (Large)
-
-- highest recall across evaluated models  
-- maintains detection performance at longer distances  
-- exhibits occasional duplicate detections  
+These behaviors were consistent and repeatable, not isolated cases.
 
 ---
 
-### YOLO (v8 / v11)
+## Key Takeaways
 
-- balanced performance across precision and recall  
-- stable detection in moderate conditions  
-- gradual degradation at long range  
+- model performance is highly dependent on operating conditions  
+- failure modes are architecture-dependent  
+- aggregate metrics do not fully capture real-world behavior  
 
----
+Detailed observations and model-specific analysis are provided in:
 
-### Faster R-CNN (ResNet50 FPN v2)
-
-- high-confidence detections when targets are clearly visible  
-- consistent failure mode at long range  
-- misses small or low-contrast targets  
-
-This failure mode is observed across multiple scenes and is not attributable to isolated data artifacts.
+→ `results/notes.md`
 
 ---
 
 ## Interpretation
 
-Aggregate metrics such as mAP and mAR provide a summary of performance, but do not fully capture model behavior.
+Aggregate metrics such as mAP and mAR summarize overall performance, but they do not fully capture how models behave under real-world conditions.
 
-In this benchmark:
+In this benchmark, consistent differences were observed across architectures:
 
-- recall at distance is a primary differentiator  
-- failure modes are consistent and architecture-dependent  
-- confidence does not always correlate with detection reliability  
+- recall at long range varied significantly, with some models maintaining detection while others failed entirely  
+- failure modes were repeatable and specific to each architecture  
+- confidence scores did not reliably reflect detection robustness, particularly under challenging conditions  
 
-As a result, **model selection based solely on metrics is insufficient for deployment decisions**.
+These patterns were observed across multiple validation samples and are not attributable to isolated cases.
 
----
+As a result, **model selection based solely on aggregate metrics is insufficient for deployment decisions**.
 
-## Metrics
-
-Models are evaluated using:
+Model performance is evaluated using standard detection metrics:
 
 - mAP (mean Average Precision)  
 - mAR (mean Average Recall)  
 - IoU (Intersection over Union)  
 - precision and recall  
 
-Additional behavior-aware metrics:
+In addition to aggregate metrics, behavior-aware measures are included to capture performance under real-world conditions:
 
 - small object recall  
 - miss rate  
 - duplicate detection rate  
 
+These metrics are complemented by qualitative inspection of model outputs to assess:
+
+- detection consistency  
+- localization stability  
+- behavior under distance and clutter  
+
 Full results:
 → `results/metrics-summary.csv`
-
-Detailed interpretation:
-→ `results/notes.md`
-
----
 
 ## Dataset
 
 The evaluation uses EO drone imagery derived from real-world video data.
 
-A subset of 23 sequences was selected from the Anti-UAV dataset:
+A subset of **23 sequences** was selected from the Anti-UAV dataset:
 → https://anti-uav.github.io/dataset/
 
 Frames were extracted and curated to capture variation in:
 
 - object distance and scale  
-- visual representation  
-- background complexity  
+- visual representation of the target  
+- background complexity and clutter  
 
 The resulting dataset contains **1,000 validated annotations** for a single class:
 
 - drone  
 
-Full details:
-→ `dataset/description.md`
+The dataset is intentionally constructed to emphasize long-range detection and small object scenarios.
 
 ---
 
 ## Methodology
 
-To ensure fair comparison:
+All models were evaluated under aligned conditions to ensure comparability.
 
-- all models are trained on the same dataset split  
-- preprocessing and augmentation are aligned  
-- evaluation is performed on a shared validation set  
+- a consistent dataset split was used across all models  
+- preprocessing and augmentation were applied uniformly  
+- evaluation was performed on a shared validation set  
 
-The evaluation protocol is designed so observed differences reflect model behavior, not experimental variation.
+Both quantitative metrics and qualitative inspection were used to assess performance.
 
-Full protocol:
-→ `methodology/evaluation-protocol.md`
+The evaluation protocol is designed so observed differences reflect **model behavior**, not experimental variation.
+
+All conclusions are based on repeated observations across validation samples.
 
 ---
 
