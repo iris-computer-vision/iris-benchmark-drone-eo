@@ -140,7 +140,7 @@ These metrics are complemented by qualitative inspection of model outputs to ass
 - behavior under distance and clutter  
 
 Full results:
-→ `results/metrics-summary.csv`
+→ `results/iris-benchmark-drone-eo-metrics.csv`
 
 ## Dataset
 
