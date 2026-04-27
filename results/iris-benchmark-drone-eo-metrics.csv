@@ -1,0 +1,6 @@
+﻿Model,Architecture,mAP,mAR,IoU@0.5,IoU@0.75,Average Latency (ms),Misses,False Positives,Duplicate Detections,Small Object Recall
+RT-DETRl,RT-DETR,0.866,1,0.994,0.941,5.8,0,0,1,1
+Faster R-CNN,ResNet50-FPNv2,0.749,0.798,0.96,0.89,76,8,0,0,0
+YOLOv11s,YOLO,0.895,1,0.995,0.972,1,0,0,1,1
+YOLOv8l,YOLO,0.884,1,0.995,0.956,3.5,0,5,1,1
+YOLOv8s,YOLO,0.897,1,0.995,0.965,1,0,0,1,1
