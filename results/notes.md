@@ -77,4 +77,12 @@ Behavioral differences are:
 
 - consistent across validation samples  
 - architecture-dependent  
-- directly relevant to deployment scenarios  
+- directly relevant to deployment scenarios
+
+| Model        | Misses | False Positives | Duplicate Detections | Notes |
+|-------------|--------|----------------|----------------------|-------|
+| YOLOv8s     | 0      | 0              | 1                    | Stable localization |
+| YOLOv8l     | 0      | 5              | 1                    | Localization degraded in duplicate case |
+| YOLOv11s    | 0      | 0              | 1                    | Similar to YOLOv8s |
+| RT-DETR     | 0      | 0              | 1                    | Strong localization |
+| Faster R-CNN| 8      | 0              | 0                    | All misses at distance |
