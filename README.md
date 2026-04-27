@@ -58,8 +58,7 @@ Under these conditions, differences between architectures become more pronounced
 
 The following architectures were evaluated:
 
-- YOLOv8 (Small, Large)  
-- YOLOv11 (Small)  
+- YOLO-family (YOLOv8 Small, YOLOv8 Large, YOLOv11 Small) 
 - RT-DETR (Large)  
 - Faster R-CNN (ResNet50 FPN v2)  
 
@@ -164,6 +163,8 @@ The dataset is intentionally constructed to emphasize long-range detection and s
 ---
 
 ## Methodology
+
+Dataset growth and annotation were performed using a similarity-based candidate discovery process with human-in-the-loop validation.
 
 All models were evaluated under aligned conditions to ensure comparability.
 
